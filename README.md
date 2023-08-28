@@ -2,7 +2,7 @@
 
 ## Author: (Sergio)
 
-**Description:** WBCE CMS 1.6.1 is affected by a cross-site stored scripting (XSS) vulnerability that allows attackers to execute arbitrary code via a payload crafted in the Intro Page parameter in the Pages menu. The payload will be executed on the main page independent of the user's session, so accessing the home web with another user will also execute the payload.
+**Description:** WBCE CMS 1.6.1 is affected by a Cross-Site stored scripting (XSS) vulnerability that allows attackers to execute arbitrary code via a payload crafted in the Intro Page parameter in the Pages menu. The payload will be executed on the main page independent of the user's session, so accessing the home web with another user will also execute the payload.
 
 ---
 
