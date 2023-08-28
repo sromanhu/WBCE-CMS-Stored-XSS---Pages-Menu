@@ -1,50 +1,44 @@
-# CSZ CMS Stored XSS v1.3.0
+# WBCE CMS Stored XSS v1.6.1
 
 ## Author: (Sergio)
 
-**Description:** CSZ CMS 1.3.0 is affected by a Stored Cross-Site Scripting (XSS) vulnerability that allows attackers to execute arbitrary code via a crafted payload to the Additional Meta Tag parameter in the Site Settings Menu that will appear both on the main page and on the subpages. 
+**Description:** WBCE CMS 1.6.1 is affected by a cross-site stored scripting (XSS) vulnerability that allows attackers to execute arbitrary code via a payload crafted in the Intro Page parameter in the Pages menu. The payload will be executed on the main page independent of the user's session, so accessing the home web with another user will also execute the payload.
 
 ---
 
 ### POC:
 
 
-When logging into the panel, we will go to the "Site Settings" section off General Menu [(http://localhost/cszcms/admin/settings)]
+When logging into the panel, we will go to the "Modify Intro Page" section off Pages [(http://localhost/wbce/wbce/admin/pages/index.php)]
 
-![image](https://github.com/sromanhu/CSZ-CMS-Stored-XSS---Site-Settings/assets/87250597/a7b3bc1d-5f87-4614-8193-946278bb3af3)
-
-
+![XSS_IntroPage](https://github.com/sromanhu/WBCE-CMS-Stored-XSS---Pages-Menu/assets/87250597/a58d922c-5d99-4396-b5bc-02b690817fd8)
 
 
-
-We edit that Site Settings that we have created and see that we can inject arbitrary Javascript code in the Additional Meta Tag field.
+We edit the body configuration where we add the XSS payload:
 
 
 ### XSS Payload:
 
 ```js
-<img src=1 onerror=alert("XSS")
+<svg onload=alert(1)> "><svg onload=alert(1)// "onmouseover=alert(1)// "autofocus/onfocus=alert(1)//
 ```
 
 
-In the following image you can see the embedded code that executes the payload in the main web and the subpages:
+In the following image you can see the embedded code that executes the payload in the main web:
 
-![image](https://github.com/sromanhu/CSZ-CMS-Stored-XSS---Site-Settings/assets/87250597/222c99f0-c00e-43d5-a46e-7d7455d2b214)
-
-
-![image](https://github.com/sromanhu/CSZ-CMS-Stored-XSS---Site-Settings/assets/87250597/1d5272cc-3f41-48a4-9a4c-19db4e744eda)
+![XSS_payload](https://github.com/sromanhu/WBCE-CMS-Stored-XSS---Pages-Menu/assets/87250597/f745c9c0-3ea5-49f8-9e8f-2be2cb8623a6)
 
 
-![image](https://github.com/sromanhu/CSZ-CMS-Stored-XSS---Site-Settings/assets/87250597/d475b79d-0e6e-4f7f-a8e1-ca361515c009)
-
-
-![image](https://github.com/sromanhu/CSZ-CMS-Stored-XSS---Site-Settings/assets/87250597/4bb0d957-3ab9-4872-bdde-dc5a53160fb6)
+When clicking on "View Site" or accessing the home page, the payload is executed:
+![XSS](https://github.com/sromanhu/WBCE-CMS-Stored-XSS---Pages-Menu/assets/87250597/47aa2bd2-247a-4173-9b4c-5d08dd9fbe35)
 
 
 If we log in with another user, the payload also skips:
 
-![image](https://github.com/sromanhu/CSZ-CMS-Stored-XSS---Site-Settings/assets/87250597/3af19bb4-e666-48ca-a1de-9914f3997771)
+![XSS_Stored](https://github.com/sromanhu/WBCE-CMS-Stored-XSS---Pages-Menu/assets/87250597/299b7e4c-230d-448f-bbbc-43d9e89010db)
 
+
+![XSS](https://github.com/sromanhu/WBCE-CMS-Stored-XSS---Pages-Menu/assets/87250597/be8c8b55-3cd4-4382-853e-f4986d69a469)
 
 
 </br>
